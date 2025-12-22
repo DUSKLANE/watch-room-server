@@ -369,7 +369,9 @@ pm2 restart watch-room-server
 
 ## 故障排查
 
-### 连接失败
+遇到问题？查看详细的 [故障排查指南](TROUBLESHOOTING.md)。
+
+常见问题：
 
 1. 检查防火墙是否开放端口
 2. 检查 ALLOWED_ORIGINS 配置

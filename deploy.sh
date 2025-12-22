@@ -14,7 +14,7 @@ fi
 
 # 安装依赖
 echo "📦 安装依赖..."
-npm ci --only=production
+npm install
 
 # 构建项目
 echo "🔨 构建项目..."
