@@ -82,11 +82,20 @@ const io = new Server(httpServer, {
   pingInterval: 25000,
   // 鉴权中间件
   allowRequest: (req, callback) => {
+    // 详细日志
+    console.log('[WatchRoom] Connection attempt from:', req.headers.origin);
+    console.log('[WatchRoom] Authorization header:', req.headers.authorization);
+    console.log('[WatchRoom] All headers:', JSON.stringify(req.headers, null, 2));
+    console.log('[WatchRoom] Expected AUTH_KEY:', AUTH_KEY);
+
     const auth = req.headers.authorization;
     if (auth === `Bearer ${AUTH_KEY}`) {
+      console.log('[WatchRoom] ✅ Authentication successful');
       callback(null, true);
     } else {
-      console.log('[WatchRoom] Unauthorized connection attempt from:', req.headers.origin);
+      console.log('[WatchRoom] ❌ Authentication failed');
+      console.log('[WatchRoom] Received:', auth);
+      console.log('[WatchRoom] Expected:', `Bearer ${AUTH_KEY}`);
       callback('Unauthorized', false);
     }
   },
