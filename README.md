@@ -1,8 +1,6 @@
 # Watch Room Server
 
-独立的观影室服务器，为部署在 Vercel 的 MoonTVPlus 提供实时同步观影功能。
-
-> **⚠️ 重要提示：** 如果遇到 Docker 构建失败（`npm ci` 错误），请查看 [快速修复指南](HOTFIX.md)。
+独立的观影室服务器，为部署在 Vercel 的 MoonTVPlus(https://github.com/mtvpls/MoonTVPlus) 提供实时同步观影功能。
 
 ## 功能特性
 
@@ -122,9 +120,9 @@ docker run -d \
 1. 在 [Railway](https://railway.app) 创建新项目
 2. 连接 GitHub 仓库或上传代码
 3. 设置环境变量：
-   - `AUTH_KEY`: 你的认证密钥
-   - `ALLOWED_ORIGINS`: 你的前端域名
-   - `PORT`: 3001（Railway 会自动分配）
+    - `AUTH_KEY`: 你的认证密钥
+    - `ALLOWED_ORIGINS`: 你的前端域名
+    - `PORT`: 3001（Railway 会自动分配）
 4. Railway 会自动检测并部署
 
 ### Render 部署
@@ -132,8 +130,8 @@ docker run -d \
 1. 在 [Render](https://render.com) 创建新的 Web Service
 2. 连接 GitHub 仓库
 3. 配置：
-   - Build Command: `npm install && npm run build`
-   - Start Command: `npm start`
+    - Build Command: `npm install && npm run build`
+    - Start Command: `npm start`
 4. 设置环境变量（同上）
 5. 部署
 
@@ -237,6 +235,7 @@ server {
 健康检查端点
 
 响应：
+
 ```json
 {
   "status": "ok",
@@ -250,11 +249,13 @@ server {
 服务器统计信息（需要认证）
 
 请求头：
+
 ```
 Authorization: Bearer YOUR_AUTH_KEY
 ```
 
 响应：
+
 ```json
 {
   "totalRooms": 5,
@@ -277,15 +278,15 @@ Authorization: Bearer YOUR_AUTH_KEY
 Socket.IO 连接端点，需要在连接时提供认证：
 
 ```javascript
-import { io } from 'socket.io-client';
+import {io} from 'socket.io-client';
 
 const socket = io('https://your-server.com', {
-  auth: {
-    token: 'YOUR_AUTH_KEY'
-  },
-  extraHeaders: {
-    Authorization: 'Bearer YOUR_AUTH_KEY'
-  }
+    auth: {
+        token: 'YOUR_AUTH_KEY'
+    },
+    extraHeaders: {
+        Authorization: 'Bearer YOUR_AUTH_KEY'
+    }
 });
 ```
 
@@ -313,11 +314,13 @@ WATCH_ROOM_EXTERNAL_SERVER_AUTH=your-secret-auth-key
 ### 查看日志
 
 Docker Compose:
+
 ```bash
 docker-compose logs -f
 ```
 
 PM2:
+
 ```bash
 pm2 logs watch-room-server
 ```
@@ -325,11 +328,13 @@ pm2 logs watch-room-server
 ### 重启服务
 
 Docker Compose:
+
 ```bash
 docker-compose restart
 ```
 
 PM2:
+
 ```bash
 pm2 restart watch-room-server
 ```
@@ -341,6 +346,7 @@ pm2 restart watch-room-server
 3. 重启服务
 
 Docker Compose:
+
 ```bash
 git pull
 docker-compose down
@@ -349,6 +355,7 @@ docker-compose up -d
 ```
 
 PM2:
+
 ```bash
 git pull
 npm install
@@ -371,7 +378,6 @@ pm2 restart watch-room-server
 
 ## 故障排查
 
-遇到问题？查看详细的 [故障排查指南](TROUBLESHOOTING.md)。
 
 常见问题：
 
@@ -390,7 +396,7 @@ pm2 restart watch-room-server
 
 - 房主离线 5 分钟后房间会自动删除
 - 房主离线 30 秒后会清除播放状态
-- 这是正常的清理机制
+- 这是正常清理机制
 
 ## 安全建议
 
