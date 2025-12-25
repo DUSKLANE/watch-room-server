@@ -25,7 +25,68 @@
 - Socket.IO
 - Docker
 
-## 快速开始
+## 快速部署
+
+### 使用 Docker（推荐）
+
+最简单的部署方式，使用 Docker Hub 镜像：
+
+```bash
+docker run -d \
+  --name watch-room-server \
+  --restart unless-stopped \
+  -p 3001:3001 \
+  -e AUTH_KEY=your-secret-key \
+  -e ALLOWED_ORIGINS=https://your-domain.com \
+  -e NODE_ENV=production \
+  cyc233/watch-room-server:latest
+```
+
+**Docker Hub**: https://hub.docker.com/r/cyc233/watch-room-server
+
+详细的 Docker 部署选项请查看 [Docker 部署](#docker-部署) 章节。
+
+## 配置 MoonTVPlus
+
+部署服务器后，需要在 MoonTVPlus 中配置连接信息。
+
+### Vercel 环境变量配置
+
+在 Vercel 项目设置中添加以下环境变量：
+
+```env
+WATCH_ROOM_ENABLED=true
+WATCH_ROOM_SERVER_TYPE=external
+WATCH_ROOM_EXTERNAL_SERVER_URL=https://your-watch-room-server.com
+WATCH_ROOM_EXTERNAL_SERVER_AUTH=your-secret-auth-key
+```
+
+**重要提示：**
+- `WATCH_ROOM_EXTERNAL_SERVER_AUTH` 必须与观影室服务器的 `AUTH_KEY` 完全一致
+- 设置后需要重新部署 Vercel 项目
+
+### 管理后台配置（可选）
+
+也可以在 MoonTVPlus 管理后台配置：
+
+1. 登录管理后台
+2. 进入"观影室设置"
+3. 启用观影室功能
+4. 选择"外部服务器"
+5. 填写：
+   - 服务器地址：`https://your-watch-room-server.com`
+   - 认证密钥：与服务器的 `AUTH_KEY` 相同
+6. 保存设置
+
+### 验证连接
+
+配置完成后，访问 MoonTVPlus：
+
+1. 创建观影室
+2. 如果连接成功，会显示房间信息
+3. 如果失败，查看浏览器控制台和服务器日志
+
+## 本地开发
 
 ### 1. 安装依赖
 
@@ -338,25 +399,6 @@ const socket = io('https://your-server.com', {
     }
 });
 ```
-
-## MoonTVPlus 配置
-
-在 MoonTVPlus 的环境变量中配置外部观影室服务器：
-
-```env
-# 观影室配置
-WATCH_ROOM_ENABLED=true
-WATCH_ROOM_SERVER_TYPE=external
-WATCH_ROOM_EXTERNAL_SERVER_URL=https://your-server.com
-WATCH_ROOM_EXTERNAL_SERVER_AUTH=your-secret-auth-key
-```
-
-或在管理后台的观影室设置中配置：
-
-1. 进入管理后台 -> 观影室设置
-2. 启用观影室功能
-3. 选择"外部服务器"
-4. 填写服务器地址和认证密钥
 
 ## 监控和维护
 
