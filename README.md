@@ -1,7 +1,6 @@
 # Watch Room Server
 
-[![Docker Hub](https://img.shields.io/docker/v/cyc233/watch-room-server?label=Docker%20Hub&logo=docker)](https://hub.docker.com/r/cyc233/watch-room-server)
-[![Docker Pulls](https://img.shields.io/docker/pulls/cyc233/watch-room-server)](https://hub.docker.com/r/cyc233/watch-room-server)
+[![GitHub Container Registry](https://img.shields.io/badge/ghcr.io-watch--room--server-blue?logo=docker)](https://github.com/szemeng76/watch-room-server/pkgs/container/watch-room-server)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 独立的观影室服务器，为部署在 Vercel 的 [MoonTVPlus](https://github.com/mtvpls/MoonTVPlus) 提供实时同步观影功能。
@@ -29,7 +28,7 @@
 
 ### 使用 Docker（推荐）
 
-最简单的部署方式，使用 Docker Hub 镜像：
+最简单的部署方式，使用 GitHub Container Registry 镜像：
 
 ```bash
 docker run -d \
@@ -39,10 +38,10 @@ docker run -d \
   -e AUTH_KEY=your-secret-key \
   -e ALLOWED_ORIGINS=https://your-domain.com \
   -e NODE_ENV=production \
-  cyc233/watch-room-server:latest
+  ghcr.io/szemeng76/watch-room-server:latest
 ```
 
-**Docker Hub**: https://hub.docker.com/r/cyc233/watch-room-server
+**GitHub Container Registry**: https://github.com/szemeng76/watch-room-server/pkgs/container/watch-room-server
 
 详细的 Docker 部署选项请查看 [Docker 部署](#docker-部署) 章节。
 
@@ -115,13 +114,13 @@ npm start
 
 ## Docker 部署
 
-### 使用 Docker Hub 镜像（最简单）
+### 使用 GitHub Container Registry 镜像（最简单）
 
 直接使用已发布的 Docker 镜像：
 
 ```bash
 # 拉取镜像
-docker pull cyc233/watch-room-server:latest
+docker pull ghcr.io/szemeng76/watch-room-server:latest
 
 # 运行容器
 docker run -d \
@@ -131,7 +130,7 @@ docker run -d \
   -e AUTH_KEY=your-secret-key \
   -e ALLOWED_ORIGINS=https://your-domain.com \
   -e NODE_ENV=production \
-  cyc233/watch-room-server:latest
+  ghcr.io/szemeng76/watch-room-server:latest
 ```
 
 或使用 Docker Compose：
@@ -141,7 +140,7 @@ version: '3.8'
 
 services:
   watch-room-server:
-    image: cyc233/watch-room-server:latest
+    image: ghcr.io/szemeng76/watch-room-server:latest
     container_name: watch-room-server
     restart: unless-stopped
     ports:
@@ -158,7 +157,7 @@ services:
 docker-compose up -d
 ```
 
-**Docker Hub 地址**: https://hub.docker.com/r/cyc233/watch-room-server
+**GitHub Container Registry**: https://github.com/szemeng76/watch-room-server/pkgs/container/watch-room-server
 
 ### 使用 Docker Compose（从源码构建）
 

@@ -60,11 +60,11 @@ fly deploy
 
 ### 方案 3: Docker（推荐自建）
 
-**使用 Docker Hub 镜像（最简单）**：
+**使用 GitHub Container Registry 镜像（最简单）**：
 
 ```bash
 # 拉取镜像
-docker pull cyc233/watch-room-server:latest
+docker pull ghcr.io/szemeng76/watch-room-server:latest
 
 # 运行
 docker run -d \
@@ -74,7 +74,7 @@ docker run -d \
   -e AUTH_KEY=your-secret-key \
   -e ALLOWED_ORIGINS=https://your-domain.com \
   -e NODE_ENV=production \
-  cyc233/watch-room-server:latest
+  ghcr.io/szemeng76/watch-room-server:latest
 
 # 查看日志
 docker logs -f watch-room-server
@@ -89,7 +89,7 @@ version: '3.8'
 
 services:
   watch-room-server:
-    image: cyc233/watch-room-server:latest
+    image: ghcr.io/szemeng76/watch-room-server:latest
     container_name: watch-room-server
     restart: unless-stopped
     ports:
@@ -107,7 +107,7 @@ docker-compose up -d
 docker-compose logs -f
 ```
 
-**Docker Hub**: https://hub.docker.com/r/cyc233/watch-room-server
+**GitHub Container Registry**: https://github.com/szemeng76/watch-room-server/pkgs/container/watch-room-server
 
 ### 方案 4: VPS
 
